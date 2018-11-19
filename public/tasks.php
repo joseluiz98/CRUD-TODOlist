@@ -5,12 +5,7 @@
 
         protected $conn = null;
 
-        public function __construct()
-        {
-            $this->connect();
-        }
-
-        public function connect()
+        public function conectar()
         {
             $this->conn = new PDO("mysql:host=localhost;dbname=tasks", "root", "root");
         }
@@ -39,19 +34,6 @@
             ];
 
             $cmd->execute($data);
-        }
-
-        public function removeTask($data)
-        {
-            $cmd = $this->conn->prepare (
-                "DELETE FROM task WHERE id = :id"
-            );
-
-            $data = [
-                ':id' => $data['id']
-            ];
-
-            return $cmd->execute($data);
         }
     }
 ?>

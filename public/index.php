@@ -1,3 +1,20 @@
+<?php
+	require 'tasks.php';
+
+	$dados = new Task();
+	$dados->conectar();
+
+	$tasks = $dados->getAllTasks();
+
+	foreach ($tasks as $task)
+	{
+		echo "<h3>Tarefa " .$task['id']. "</h3>";
+		echo "<p>";
+		echo nl2br($task['descricao']);
+		echo "</p>";
+	}
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,48 +24,36 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link rel="stylesheet" href="styles/main.css"/>
+
     <title>Hello, world!</title>
   </head>
   <body>
 		<div class="container pt-3 mt-3">
-			<h2>Tarefas</h2>
+		<h2>Novo Tópico</h2>
+		<form action="insert.php" method="POST">
+				<label>
+						Título: <input type="text" name="titulo">
+				</label>
+				<br>
+				<label>
+						Descrição:
+						<br>
+						<textarea name="descricao" cols="50" rows="20"></textarea>
+				</label>
+				<br>
+				<input type="submit" value="Adicionar Tópico">
+		</form>
 
-			<form class="mb-5" action="insert.php" method="POST">
-				<div class="form-group row">
-				<div class="col-sm-10">
-					<input name="descricao" type="text" class="form-control" placeholder="Digite sua tarefa aqui!">
-				</div>
-					<div class="col-sm-2">
-						<button type="submit" class="btn btn-primary">Adicionar</button>
-					</div>
-				</div>
-			</form>
-
-			<?php
-				require 'tasks.php';
-
-				$dados = new Task();
-
-				$tasks = $dados->getAllTasks();
-
-				foreach ($tasks as $task)
-				{
-					echo '<div class="form-group row">';
-					echo '<div class="col-sm-10">';
-					echo "<h3>Tarefa " .$task['id']. "</h3>";
-					echo "<p>";
-					echo nl2br($task['descricao']);
-					echo "</div>";
-					echo '<div class="col-sm-2">';
-					echo "<a href='delete.php?id=" .$task['id']."'>";
-					echo "<img src='imgs/del.svg'/>";
-					echo "</a>";
-					echo "</div>";
-					echo "</div>";
-					echo "</p>";
-				}
-			?>
+		<form>
+			<div class="form-group">
+				<label for="exampleFormControlInput1">Email address</label>
+				<input class="form-control form-control-lg" type="text" placeholder=".form-control-lg">
+			</div>
+			<div class="form-group">
+				<label for="exampleFormControlSelect1">Example select</label>
+				<input class="form-control form-control-lg" type="text" placeholder=".form-control-lg">
+			</div>
+		</form>
 		</div>
 
     <!-- Optional JavaScript -->
