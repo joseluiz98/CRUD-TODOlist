@@ -19,8 +19,20 @@
         {
             $cmd = $this->conn->prepare("SELECT * FROM task");
             $cmd->execute();
-
+            
             return $cmd;
+        }
+
+
+        public function getTask($id)
+        {
+            $sql = "SELECT * FROM task WHERE id = :id LIMIT 1";
+            $comando = $this->conn->prepare($sql);
+
+            $data = [':id' => $id];
+            $comando->execute($data);
+
+            return $comando->fetch(PDO::FETCH_ASSOC);
         }
 
         public function insertTask($data)
@@ -32,6 +44,19 @@
                 ) VALUES (
                     :descricao
                 )"
+            );
+
+            $data = [
+                ':descricao' => $data['descricao']
+            ];
+
+            $cmd->execute($data);
+        }
+
+        public function updateTask($data)
+        {
+            $cmd = $this->conn->prepare(
+                "UPDATE task SET descricao = :descricao"
             );
 
             $data = [

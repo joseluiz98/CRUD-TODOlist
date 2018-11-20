@@ -41,7 +41,7 @@
 					echo nl2br($task['descricao']);
 					echo "</div>";
 					echo '<div class="col-sm-2">';
-					echo "<a data-toggle='modal' data-target='#editTaskModal'>";
+					echo "<a href='edit.php?id=" .$task['id']."'>";
 					echo "<img src='imgs/edit.svg'/>";
 					echo "</a>";
 					echo "<a href='delete.php?id=" .$task['id']."'>";
